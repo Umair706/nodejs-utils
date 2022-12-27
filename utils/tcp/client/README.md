@@ -1,4 +1,4 @@
-# ConnectionHandler
+# tcp-client (ConnectionHandler)
 It is a utility class that helps in establishing and maintaining a connection with a tcp server. It attempts to reconnect to the server in case the connection is lost. It also provides a way to queue data that needs to be sent to the server when the connection is not yet established.
 
 
