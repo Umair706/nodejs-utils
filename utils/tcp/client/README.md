@@ -11,8 +11,6 @@ Option to store the data queue in Redis
 # Usage
 ```
 
-const ConnectionHandler = require('connection-handler');
-
 const config = {
     host: 'localhost',
     port: 8080,
@@ -24,7 +22,7 @@ const config = {
     }
 };
 
-const connectionHandler = new ConnectionHandler(config);
+const connectionHandler = new TCPClient(config);
 
 connectionHandler.on('connect', () => {
     console.log('Connected to the server');
