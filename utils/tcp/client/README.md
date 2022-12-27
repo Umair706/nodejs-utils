@@ -45,7 +45,7 @@ connectionHandler.send({ message: 'Hello, Server!' });
      * **config (Object):** Configuration object with the following properties:
           * **host (String):** Hostname of the server.
           * **port (Number):** Port of the server.
-          * **queueData (Bollean):** Should queue data or not.
+          * **queueData (Boolean):** Should queue data or not.
           * **reconnectInterval (Number, optional):** Interval in milliseconds between each attempt to reconnect to the server. Defaults to 5000.
           * **maxAttempts (Number, optional):** Maximum number of attempts to reconnect to the server. Defaults to 5.
           * **redis (Object, optional):** Redis configuration object with the following properties:
