@@ -46,9 +46,7 @@ connectionHandler.send({ message: 'Hello, Server!' });
           * **queueData (Boolean):** Should queue data or not.
           * **reconnectInterval (Number, optional):** Interval in milliseconds between each attempt to reconnect to the server. Defaults to 5000.
           * **maxAttempts (Number, optional):** Maximum number of attempts to reconnect to the server. Defaults to 5.
-          * **redis (Object, optional):** Redis configuration object with the following properties:
-enabled (Boolean): Whether to use Redis to store the data queue.
-Additional properties will be passed to the redis.createClient() function as options.
+          * **redis (Object, optional):** Redis configuration object.  // Redis client options (https://www.npmjs.com/package/redis#options-object-properties)
 
 # Event: 'connect'
 Emitted when the connection to the server is established.
