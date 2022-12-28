@@ -95,7 +95,7 @@ class ConnectionHandler extends EventEmitter {
          * Attempts to reconnect to the server if the connection is lost.
      */
     reconnect() {
-        console.log('Re-Attempting Connection to OSS Server');
+        console.log('Re-Attempting Connection to Server');
         if (this.client) {
             this.client.removeAllListeners();
             this.client = null;
