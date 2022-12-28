@@ -6,7 +6,7 @@ class ConnectionHandler extends EventEmitter {
     constructor(config) {
         // Call the super constructor
         super();
-
+        if (!config.host || !config.port) { throw new Error('Invalid Host or Port Provided') }
         // Initialize the client and other variables
         this.client = null;
         this.reconnecting = false; // Flag to indicate if a reconnection is in progress
@@ -54,7 +54,18 @@ class ConnectionHandler extends EventEmitter {
             this.connected = false; // Set the connected flag to false
             this.reconnect();
         });
-
+        this.client.on('data', (data) => {
+            this.emit('data', data);
+        });
+        this.client.on('timeout', (data) => {
+            this.emit('timeout', data);
+        });
+        this.client.on('drain', (data) => {
+            this.emit('drain', data);
+        });
+        this.client.on('lookup', (data) => {
+            this.emit('lookup', data);
+        });
         this.client.on('error', (error) => {
             this.emit('error', error);
             this.reconnect();
@@ -92,7 +103,7 @@ class ConnectionHandler extends EventEmitter {
             if (!this.queueData) return;
             // If the client is not yet connected, queue the data
             if (this.config?.redis) {
-                this.redisClient.rpush('data_queue', JSON.stringify(data), (error) => {
+                this.redisClient.rPush('data_queue', JSON.stringify(data), (error) => {
                     if (error) {
                         console.error(error);
                     }
@@ -109,7 +120,7 @@ class ConnectionHandler extends EventEmitter {
         if (!this.queueData) return;
 
         if (this.config?.redis) {
-            this.processDataFromQueue();
+            this.processDataFromRedisQueue();
         } else {
             // Check if there is any queued data
             if (this.dataQueue && this.dataQueue.length > 0) {
@@ -122,19 +133,25 @@ class ConnectionHandler extends EventEmitter {
             }
         }
     }
-    processDataFromQueue() {
+    processDataFromRedisQueue() {
         if (!this.queueData) return;
 
         if (!this.config?.redis) return;
 
-        this.redisClient.lpop('data_queue', (error, data) => {
+        this.redisClient.lPop('data_queue', (error, data) => {
             if (error) {
                 console.error(error);
             } else if (data) {
                 this.client.write(JSON.stringify(data));
-                this.processDataFromQueue(); // Recursively call the function to get the next item from the queue
+                this.processDataFromRedisQueue(); // Recursively call the function to get the next item from the queue
             }
         });
+    }
+    destroy(wait = 0) {
+        setTimeout(() => { this.client.destroy() }, wait)
+    }
+    end(wait = 0) {
+        setTimeout(() => { this.client.end() }, wait)
     }
 }
 
