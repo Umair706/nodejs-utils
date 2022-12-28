@@ -28,7 +28,7 @@ class ConnectionPool {
         return connection;
     }
 
-    releaseConnection() {
+    releaseConnection(connection) {
         connection.busy = false;
         const queuedConnection = this.connectionQueue.shift();
         if (queuedConnection) {
