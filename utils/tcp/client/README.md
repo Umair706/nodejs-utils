@@ -1,4 +1,4 @@
-# ConnectionHandler
+# tcp-client (ConnectionHandler)
 It is a utility class that helps in establishing and maintaining a connection with a tcp server. It attempts to reconnect to the server in case the connection is lost. It also provides a way to queue data that needs to be sent to the server when the connection is not yet established.
 
 
@@ -11,8 +11,6 @@ Option to store the data queue in Redis
 # Usage
 ```
 
-const ConnectionHandler = require('connection-handler');
-
 const config = {
     host: 'localhost',
     port: 8080,
@@ -24,7 +22,7 @@ const config = {
     }
 };
 
-const connectionHandler = new ConnectionHandler(config);
+const connectionHandler = new TCPClient(config);
 
 connectionHandler.on('connect', () => {
     console.log('Connected to the server');
@@ -48,9 +46,7 @@ connectionHandler.send({ message: 'Hello, Server!' });
           * **queueData (Boolean):** Should queue data or not.
           * **reconnectInterval (Number, optional):** Interval in milliseconds between each attempt to reconnect to the server. Defaults to 5000.
           * **maxAttempts (Number, optional):** Maximum number of attempts to reconnect to the server. Defaults to 5.
-          * **redis (Object, optional):** Redis configuration object with the following properties:
-enabled (Boolean): Whether to use Redis to store the data queue.
-Additional properties will be passed to the redis.createClient() function as options.
+          * **redis (Object, optional):** Redis configuration object.  // Redis client options (https://www.npmjs.com/package/redis#options-object-properties)
 
 # Event: 'connect'
 Emitted when the connection to the server is established.
