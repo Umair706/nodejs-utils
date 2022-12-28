@@ -36,11 +36,15 @@ class ConnectionHandler extends EventEmitter {
 
 
     connect() {
-        this.client = net.createConnection({
-            host: this.host,
-            port: this.port
-        });
-
+        try {
+            this.client = net.createConnection({
+                host: this.host,
+                port: this.port
+            });
+        } catch (error) {
+            this.emit('error', error);
+            return;
+        }
         this.client.on('connect', () => {
             this.attempts = 0; // Reset the attempts counter
             this.reconnecting = false; // Reset the reconnecting flag

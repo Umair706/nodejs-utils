@@ -4,6 +4,7 @@ const config = {
     port: "8000",
 }
 const connection = new tcpClient(config);
+
 connection.on('data', (data) => {
     console.log(`Recevied Data From TCP Server`, data);
 });
