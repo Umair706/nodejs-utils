@@ -35,7 +35,8 @@ class ConnectionHandler extends EventEmitter {
     }
 
 
-    connect() {
+    async connect() {
+
         try {
             this.client = net.createConnection({
                 host: this.host,
