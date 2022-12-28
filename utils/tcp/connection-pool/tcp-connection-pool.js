@@ -1,4 +1,4 @@
-const TCPClient = require('./tcp-client');
+const TCPClient = require('../client/tcp-client');
 
 class ConnectionPool {
     constructor(config) {
