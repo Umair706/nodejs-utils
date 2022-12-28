@@ -1,10 +1,10 @@
-const { tcpClient } = require('../utils');
+const { TcpClient } = require('../utils');
 const config = {
-    host: "192.168.1.82",
+    host: "localhost",
     port: "8000",
     queueData: true,
 }
-const connection = new tcpClient(config);
+const connection = new TcpClient(config);
 for (let i = 0; i < 100; i++) {
     // This should queue
     connection.send({ sample: "Data " + i })

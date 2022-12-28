@@ -1,8 +1,21 @@
 const net = require('net');
 const { EventEmitter } = require('events');
 const redis = require('redis');
-
+/**
+ * A connection handler that creates and maintains a connection to a server.
+ * @extends EventEmitter
+ */
 class ConnectionHandler extends EventEmitter {
+    /**
+    * 
+    * @param {Object} config - Connection configuration object.
+    * @param {string} config.host - Hostname or IP address of the server.
+    * @param {number} config.port - Port number of the server.
+    * @param {Object} [config.redis] - Redis configuration object.
+    * @param {boolean} [config.queueData=false] - Flag to indicate whether to queue data if connection is not established.
+    * @param {number} [config.maxAttempts=5] - Maximum number of connection attempts before giving up.
+    * @param {number} [config.reconnectInterval=5000] - Interval between connection attempts in milliseconds.
+    */
     constructor(config) {
         // Call the super constructor
         super();
@@ -34,7 +47,9 @@ class ConnectionHandler extends EventEmitter {
         this.connect();
     }
 
-
+    /**
+         * Connects to the server.
+    */
     async connect() {
 
         try {
@@ -76,7 +91,9 @@ class ConnectionHandler extends EventEmitter {
             this.reconnect();
         });
     }
-
+    /**
+         * Attempts to reconnect to the server if the connection is lost.
+     */
     reconnect() {
         console.log('Re-Attempting Connection to OSS Server');
         if (this.client) {

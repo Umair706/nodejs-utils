@@ -1,9 +1,9 @@
-const { tcpClient } = require('../utils');
+const { TcpClient } = require('../utils');
 const config = {
-    host: "192.168.1.82",
+    host: "localhost",
     port: "8000",
 }
-const connection = new tcpClient(config);
+const connection = new TcpClient(config);
 
 connection.on('data', (data) => {
     console.log(`Recevied Data From TCP Server`, data);

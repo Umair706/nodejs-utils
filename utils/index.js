@@ -1,2 +1,3 @@
-const tcpClient = require('./tcp/client/tcp-client');
-module.exports = { tcpClient }
+const TcpClient = require('./tcp/client/tcp-client');
+const TCPConnectionPool = require('./tcp/client/tcp-connection-pool');
+module.exports = { TcpClient, TCPConnectionPool }

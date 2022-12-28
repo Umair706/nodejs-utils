@@ -1,5 +1,5 @@
 {
-  "name": "nodejs-utils",
+  "name": "tcp-utils",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
