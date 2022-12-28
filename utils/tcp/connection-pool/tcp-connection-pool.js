@@ -41,5 +41,11 @@ class ConnectionPool {
         this.connections = [];
         this.connectionQueue = [];
     }
+    connectionQueueLength() {
+        return this.connectionQueue.length
+    }
+    connectionsLength() {
+        return this.connections.length
+    }
 }
 module.exports = ConnectionPool;

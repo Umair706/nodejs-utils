@@ -5,7 +5,7 @@ const server = net.createServer((socket) => {
 
     socket.on('data', (data) => {
         console.log(`Received data from client: ${data}`);
-        socket.write(`Echo: ${data}`);
+        setTimeout(() => { socket.write(`Echo: ${data}`) }, 5000);
     });
 
     socket.on('end', () => {
