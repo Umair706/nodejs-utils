@@ -7,9 +7,9 @@ To use the connection pool, you need to import the ConnectionPool class and crea
 * **maxConnections:** The maximum number of connections that the pool can hold.
 To get a connection from the pool, call the getConnection method. This method returns a promise that resolves with a connection object. The connection object has a busy property that indicates whether the connection is being used or not.
 
-To release a connection back to the pool, call the **releaseConnection** method and pass the connection object as an argument. This will set the busy property of the connection object to false.
+To release a connection back to the pool, call the '**releaseConnection**'  method and pass the connection object as an argument. This will set the busy property of the connection object to false.
 
-To end all connections in the pool, call the **end** method. This will destroy all the connections in the pool and reset the pool.
+To end all connections in the pool, call the '**end**' method. This will destroy all the connections in the pool and reset the pool.
 
 Here's an example of how to use the connection pool:
 ```
