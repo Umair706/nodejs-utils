@@ -14,8 +14,6 @@ To end all connections in the pool, call the '**end**' method. This will destroy
 Here's an example of how to use the connection pool:
 ```
 
-const ConnectionPool = require('tcp-connection-pool');
-
 const pool = new ConnectionPool({ maxConnections: 5 });
 
 // Get a connection from the pool
